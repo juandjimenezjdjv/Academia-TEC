@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>AcademiaTEC - Detalles de la Tutoría</title>
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/popup.css">
+      <link rel="stylesheet" href="css/unica.css">
+      <link rel="stylesheet" href="css/botones.css">
+      <link rel="icon" href="img/ATicon.ico">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="top">
+      <ul>
+        <li><a href="index.html"><img src="img/logo-home.png" alt="Inicio" class="logo"></a></li>
+        <li><a href="index.html" class="btn-top">Página de inicio</a></li>
+        <li><a href="tutorias.html" class="btn-top">Tutorías</a></li>
+        <li><a href="contactenos.html" class="btn-top">Contáctenos</a></li>
+        <li><a href="nueva_tutoria.html" class="btn-top">Nueva tutoría</a></li>
+        <li><a href="tutoria_unica.html" id="openPopup"><img src="img/register.png" alt="Registro" class="logo"></a></li>
+        <li><a href="mis_tutorias.html"><img src="img/mis-tutorias.png" alt="Mis tutorías" class="logo"></a></li>
+      </ul>
+    </div>
+
+    <div class="popup-wrapper" id="popupWrapper" style="display: none;">
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close" id="closePopup">&times;</span>
+          <div class="centrado">
+            <h2><strong>¡Bienvenido!</strong></h2>
+            <a class="custom-btn" href="perfil_config.html" id="vperfil">Ver perfil</a><br>
+            <a class="custom-btn" href="iniciosesion.html" id="inisesion">Iniciar sesión</a><br>
+            <a class="custom-btn-white" href="crearcuenta.html" id="crearsesion">Crear cuenta</a></br>
+            <a class="custom-btn" href="index.html" id="Scerrarsesion">Cerrar sesion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="containera">
+      <div class="middlea">
+        <div id="tutoriaDetalles" class="tutoria-detalles"></div>
+        <div class="top" style="max-width: 850px;">
+          <div class="middle" style="text-align: left;">
+          <h2><strong>Otras tutorías</strong></h2>
+        </div>
+        </div>
+        <div id="randomTutorias" class="random-tutorias"></div>
+      </div>
+    </div>
+
+    <div style="text-align: center;" class="bottom">
+        <img src="img/logo.png" alt="logo photo">
+        <p class="text-bottom">Únete a nuestra comunidad de aprendizaje en línea.</p>
+        <hr style="border-top: 0.1px white; width: 100%;">
+        <p class="copyr">Copyrigth © 2024 AcademiaTEC</p>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        mostrarDetallesTutoria(id);
+    });
+
+    async function mostrarDetallesTutoria(id) {
+      const tutorias = JSON.parse(sessionStorage.getItem('tutorias'));
+      const tutoria = tutorias.find(t => t.TutoriaID == id);
+
+      if (tutoria) {
+        const response = await fetch(`http://localhost:1434/obtenerProfesor/${tutoria.CorreoTutor}`);
+        if (response.ok) {
+          const profesor = await response.json();
+          const tutoriaDetalles = document.getElementById('tutoriaDetalles');
+
+          const formatTime = (time) => {
+          const date = new Date(time);
+          return date.toISOString().substr(11, 5);
+          };
+          profesor.HoraInicio = formatTime(profesor.HoraInicio);
+          profesor.HoraFin = formatTime(profesor.HoraFin);
+
+          const diasDisponibles = [];
+          if (profesor.Lunes) diasDisponibles.push('Lunes');
+          if (profesor.Martes) diasDisponibles.push('Martes');
+          if (profesor.Miercoles) diasDisponibles.push('Miércoles');
+          if (profesor.Jueves) diasDisponibles.push('Jueves');
+          if (profesor.Viernes) diasDisponibles.push('Viernes');
+          if (profesor.Sabado) diasDisponibles.push('Sábado');
+          if (profesor.Domingo) diasDisponibles.push('Domingo');
+          const diasTexto = diasDisponibles.join(', ');
+          
+          tutoriaDetalles.innerHTML = `
+            <div class="tutoria-detalles-content">
+              <div class="tutoria-img-container">
+                <img src="img/cate/${tutoria.Intereses}.jpg" alt="${tutoria.Intereses}" class="tutoria-img">
+              </div>
+              <div class="tutoria-info-container">
+                <h2><strong>${tutoria.NombreTutoria}</strong></h2>
+                <h3>Precio: ${tutoria.Precio}</h3>
+                <hr></br>
+                <p>Prof. ${profesor.Nombre}</p>
+                <p>Descripción: ${profesor.Descripcion}</p>
+                <p>Disponibilidad:</p>
+                <p>- Días: ${diasTexto}</p>
+                <p>- Horas: ${profesor.HoraInicio} - ${profesor.HoraFin}</p>
+                <button class="custom-btn" onclick="matricular()">Matricular</button>
+                </br>
+                <p>La clase será confirmada a más tardar en 48 horas.</p>
+              </div>
+            </div>
+            <div class="tutoria-detalles-dark-container">
+              <div class="tutoria-detalles-dark">
+                <div class="tutoria-info-container">
+                  <p>Descripción | </p><p>${tutoria.Descripcion}</p>
+                </div>
+              </div>
+            </div>
+          `;
+          mostrarTutoriasRandom(tutorias, tutoria.TutoriaID);
+        } else {
+          console.error("Error al obtener el nombre del profesor");
+        }
+      } else {
+        console.error("No se encontró la tutoría con ID:", id);
+      }
+    }
+
+
+    function mostrarTutoriasRandom(tutorias, currentTutoriaId) {
+      const randomTutoriasContainer = document.getElementById('randomTutorias');
+      const randomTutorias = tutorias.filter(t => t.TutoriaID != currentTutoriaId).sort(() => 0.5 - Math.random()).slice(0, 3);
+
+      randomTutorias.forEach(tutoria => {
+        const tutoriaCard = document.createElement('a');
+        tutoriaCard.href = `tutoria_unica.html?id=${tutoria.TutoriaID}`;
+        tutoriaCard.classList.add('tutoria-card');
+        tutoriaCard.innerHTML = `
+          <img src="img/cate/${tutoria.Intereses}.jpg" alt="${tutoria.NombreTutoria}">
+          <h3>${tutoria.NombreTutoria}</h3>
+          <p>Precio: ${tutoria.Precio}</p>
+          <p>Prof. ${tutoria.CorreoTutor}</p>
+        `;
+        randomTutoriasContainer.appendChild(tutoriaCard);
+      });
+    }
+
+    function matricular() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      window.location.href = `pagos.html?tutoriaId=${id}`;
+    }
+    </script>
+  </body>
+</html>

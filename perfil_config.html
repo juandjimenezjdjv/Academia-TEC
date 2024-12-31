@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AcademiaTEC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/formularios.css">
+    <link rel="stylesheet" href="css/sesiones.css"> 
+    <link rel="stylesheet" href="css/historial.css"> 
+    <link rel="icon" href="img/ATicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="top">
+      <ul>
+        <li>
+          <a href="index.html">
+            <img src="img/logo-home.png" alt="Inicio" class="logo">
+          </a>
+        </li>
+        <li><a href="index.html" class="btn-top">Página de inicio</a></li>
+        <li><a href="tutorias.html" class="btn-top">Tutorías</a></li>
+        <li><a href="contactenos.html" class="btn-top">Contáctenos</a></li>
+        <li><a href="nueva_tutoria.html" class="btn-top">Nueva tutoría</a></li>
+        <li>
+          <a href="perfil_config.html" id="openPopup">
+            <img src="img/register.png" alt="Registro" class="logo">
+          </a>
+        </li>
+        <li>
+          <a href="mis_tutorias.html">
+            <img src="img/mis-tutorias.png" alt="Mis tutorías" class="logo">
+          </a>
+        </li>
+      </ul>
+    </div>
+          
+    <div class="popup-wrapper" id="popupWrapper" style="display: none;">
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close" id="closePopup">&times;</span>
+          <div class="centrado">
+            <h2><strong>¡Bienvenido!</strong></h2>
+            <a class="custom-btn" href="perfil_config.html" id="vperfil">Ver perfil</a><br>
+            <a class="custom-btn" href="iniciosesion.html" id="inisesion">Iniciar sesión</a><br>
+            <a class="custom-btn-white" href="crearcuenta.html" id="crearsesion">Crear cuenta</a></br>
+            <a class="custom-btn" href="index.html" id="Scerrarsesion">Cerrar sesion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-forms">
+      <div class="middle">
+        <div>
+          <h2><strong>Perfil de cuenta</strong></h2>
+        </div>
+        <p class="p">Puedes editar tus datos cuando sea necesario.</p>
+        <p class="p"><strong>Información de cuenta</strong></p>
+        <div class="container-forms">
+          <div class="form-section">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+              </div>
+              <div class="form-field">
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-forms">
+          <div class="form-section-50">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <label for="email">Correo electrónico (<strong>NO</strong> se puede modificar)</label>
+                <input type="email" id="email" name="email" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-forms">
+          <div class="form-section">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <label for="roluser">Rol</label>
+                <input type="text" id="roluser" name="roluser">
+              </div>
+              <div class="form-field">
+                <label for="interess">Interes:</label>
+                <div class="day-checkbox-container">
+                  <select id="interess" name="categoriat">
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="p"><strong>Cambiar contraseña</strong></p>
+
+        <div class="container-forms">
+          <div class="form-section-50">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <label for="Contrasena_actual">Contraseña actual</label>
+                <input type="text" id="Contrasena_actual" name="Contrasena_actual">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-forms">
+          <div class="form-section">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <label for="Nueva_contrasena">Nueva contraseña</label>
+                <input type="Nueva_contrasena" id="Nueva_contrasena" name="Nueva_contrasena" pattern="[A-Za-z0-9]{8,12}" title="La contraseña debe tener entre 8 y 12 caracteres y solo puede contener letras y números" required>
+              </div>
+              <div class="form-field">
+                <label for="Confirmar_contrasena">Confirmar contraseña</label>
+                <input type="text" id="Confirmar_contrasena" name="Confirmar_contrasena" pattern="[A-Za-z0-9]{8,12}" title="La contraseña debe tener entre 8 y 12 caracteres y solo puede contener letras y números" required>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <p class="p"><strong>Datos de profesor (Se guardan solo si eres profesor):</strong></p>        
+        <div class="container-forms">
+          <div class="form-section-30-p" id="tutor-fields">
+            <p class="p"><strong>Descripción de tutor:</strong></p>
+            <div class="container-forms">
+              <div class="form-section-50">
+                <div class="form-row-inline">
+                  <div class="form-field">
+                    <textarea id="descripcion" name="descripcion" rows="5" cols="50"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-forms">
+            <div class="form-section-30-p">
+              <div class="form-row-inline">
+                <div class="form-field-f30">
+                  <label for="especialidad">Especialidad</label>
+                  <input type="text" id="especialidad" name="especialidad"><br>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-forms">
+            <div class="form-section-30-p">
+              <div class="form-field-f30">
+                <label for="Organizar"><strong>Su horario</strong></label><br/>
+                <label for="horario">Horario:</label><br/>
+              </div>
+              <div class="form-row-inline-form">
+                <div class="day-checkbox-container">
+                  <label for="lunes">Lunes</label>
+                  <input type="checkbox" id="lunes" name="checkbox_nombre" class="custom-checkbox">
+                </div>
+                <div class="day-checkbox-container">
+                  <label for="martes">Martes</label>
+                  <input type="checkbox" id="martes" name="checkbox_nombre" class="custom-checkbox">
+                </div>
+                <div class="day-checkbox-container">
+                  <label for="miercoles">Miércoles</label>
+                  <input type="checkbox" id="miercoles" name="checkbox_nombre" class="custom-checkbox">
+                </div>
+              </div>                    
+              <div class="form-row-inline-form">                      
+                <div class="day-checkbox-container">
+                  <label for="jueves">Jueves</label>
+                  <input type="checkbox" id="jueves" name="checkbox_nombre" class="custom-checkbox">
+                </div>
+                <div class="day-checkbox-container">
+                  <label for="viernes">Viernes</label>
+                  <input type="checkbox" id="viernes" name="checkbox_nombre" class="custom-checkbox">
+                </div>
+                <div class="day-checkbox-container">
+                  <label for="sabado">Sábado</label>
+                  <input type="checkbox" id="sabado" name="checkbox_nombre" class="custom-checkbox">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-forms">
+            <div class="form-section-30-p">
+              <div class="form-row-inline">
+                <div class="day-checkbox-container">
+                  <label for="hora_inicio">Hora de inicio:</label>
+                  <select id="hora_inicio" name="hora_inicio">
+                    <option value="06:00">6:00 AM</option>
+                    <option value="07:00">7:00 AM</option>
+                    <option value="08:00">8:00 AM</option>
+                    <option value="09:00">9:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 AM</option>
+                    <option value="13:00">01:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="15:00">03:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                    <option value="17:00">05:00 PM</option>
+                    <option value="18:00">06:00 PM</option>
+                    <option value="19:00">07:00 PM</option>
+                  </select>
+                </div>
+                <div class="day-checkbox-container">
+                  <label for="hora_fin">Hora de fin:</label>
+                  <select id="hora_fin" name="hora_fin">
+                    <option value="06:00">6:00 AM</option>
+                    <option value="07:00">7:00 AM</option>
+                    <option value="08:00">8:00 AM</option>
+                    <option value="09:00">9:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 AM</option>
+                    <option value="13:00">01:00 PM</option>
+                    <option value="14:00">02:00 PM</option>
+                    <option value="15:00">03:00 PM</option>
+                    <option value="16:00">04:00 PM</option>
+                    <option value="17:00">05:00 PM</option>
+                    <option value="18:00">06:00 PM</option>
+                    <option value="19:00">07:00 PM</option>
+                    <option value="20:00">08:00 PM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+        <div class="container-forms">
+          <a class="custom-btn" id="guardarperfil">Guardar cambios</a>
+        </div><br>
+        <div class="container-forms">
+          <a class="custom-btn-white" href="perfil_config.html" id="cancelarperfil">Cancelar cambios</a>
+          <p id="mensajeSN" style="color: red;"></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center;" class="bottom">
+      <img  src="img/logo.png" alt="logo photo">
+      <p class="text-bottom">Únete a nuestra comunidad de aprendizaje en línea.</p>
+      <hr style="border-top: 0.1px  white; width: 100%;">
+      <p class="copyr">Copyrigth © 2024 AcademiaTEC</p>
+    </div> 
+      
+    <script src="js/script.js"></script>
+    <script>
+      async function loadCategorias() {
+        try {
+          const response = await fetch('http://localhost:1434/categorias'); 
+          const categorias = await response.json();
+          const select = document.getElementById('interess');
+
+          categorias.forEach(categoria => {
+            const option = document.createElement('option');
+            option.value = categoria.intereses;
+            option.textContent = categoria.nombreCategoria;
+            select.appendChild(option);
+          });
+        } catch (error) {
+          console.error('Error al cargar las categorías:', error);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', loadCategorias);
+
+      async function datosPerfil() {
+        const user = JSON.parse(sessionStorage.getItem('usuario'));
+        console.log(user);
+        const email = user.correo;
+        const rol = user.rol;
+        const contraaaa = user.contrasena;
+
+        if (!email || !rol) {
+          console.error("No hay información de usuario en sessionStorage");
+          return;
+        }
+
+        try {
+          const response = await fetch('http://localhost:1434/obtenerPerfil', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, rol })
+          });
+
+          if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+          }
+
+          const data = await response.json();
+          document.getElementById('nombre').value = data.Nombre || '';
+          document.getElementById('apellido').value = data.Apellido || '';
+          document.getElementById('email').value = data.Correo || '';
+          document.getElementById('Contrasena_actual').value = data.Contrasena || '';
+          // document.getElementById('Nueva_contrasena').value = data.Contrasena || '';
+          document.getElementById('roluser').value = rol === 1 ? 'Profesor' : 'Estudiante';
+          document.getElementById('interess').value = data.Intereses || '';
+
+          if (rol === 1) {
+            document.getElementById('descripcion').value = data.Descripcion || '';
+            document.getElementById('especialidad').value = data.Especialidad || '';
+            document.getElementById('hora_inicio').value = data.HoraInicio;
+            document.getElementById('hora_fin').value = data.HoraFin;
+            document.getElementById('lunes').checked = data.Lunes;
+            document.getElementById('martes').checked = data.Martes;
+            document.getElementById('miercoles').checked = data.Miercoles;
+            document.getElementById('jueves').checked = data.Jueves;
+            document.getElementById('viernes').checked = data.Viernes;
+            document.getElementById('sabado').checked = data.Sabado;
+
+            document.getElementById('tutor-fields').style.display = 'block';
+          } else {
+            document.getElementById('tutor-fields').style.display = 'none';
+          }
+        } catch (error) {
+          console.error('Error al cargar los datos del perfil:', error);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', (event) => {
+        datosPerfil();
+      });
+
+      document.getElementById('guardarperfil').addEventListener('click', async function() {
+        const user = JSON.parse(sessionStorage.getItem('usuario'));
+        const email = user.correo;
+        const rol = user.rol;
+
+        if (!email || !rol) {
+          console.error("No hay información de usuario en sessionStorage");
+          document.getElementById('mensajeSN').innerText = "No hay información de usuario en sessionStorage";
+          return;
+        }
+
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const contrasena = document.getElementById('Nueva_contrasena').value;
+        const contrasena2 = document.getElementById('Confirmar_contrasena').value;
+        const interess = document.getElementById('interess').value;
+        const descripcion = document.getElementById('descripcion').value;
+        const especialidad = document.getElementById('especialidad').value;
+        const hora_inicio = document.getElementById('hora_inicio').value;
+        const hora_fin = document.getElementById('hora_fin').value;
+        const lunes = document.getElementById('lunes').checked;
+        const martes = document.getElementById('martes').checked;
+        const miercoles = document.getElementById('miercoles').checked;
+        const jueves = document.getElementById('jueves').checked;
+        const viernes = document.getElementById('viernes').checked;
+        const sabado = document.getElementById('sabado').checked;       
+
+        // Validar la nueva contraseña
+        const contrasenaValida =  /^[A-Za-z0-9]{8,12}$/;
+        if (!contrasenaValida.test(contrasena)) {
+          document.getElementById('mensajeSN').innerText = "La contraseña debe tener entre 8 y 12 caracteres y solo puede contener letras y números";
+          alert("La contraseña debe tener entre 8 y 12 caracteres y solo puede contener letras y números");
+          return;
+        }
+
+        // Validar que la nueva contraseña y la confirmación sean iguales
+        if (contrasena !== contrasena2) {
+          alert("Las contraseñas no coinciden");
+          document.getElementById('mensajeSN').innerText = "Las contraseñas no coinciden";
+          return;
+        }
+
+        try {
+          const response = await fetch('http://localhost:1434/actualizarPerfil', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, rol, nombre, apellido, contrasena, interess, descripcion, especialidad, hora_inicio, hora_fin, lunes, martes, miercoles, jueves, viernes, sabado })
+          });
+
+          if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+          }
+
+          
+          user.password = contrasena;
+          sessionStorage.setItem('usuario', JSON.stringify(user));
+
+          const data = await response.json();
+          console.log('Datos actualizados:', data);
+          
+          document.getElementById('mensajeSN').innerText = "Los cambios se realizaron con éxito";
+        } catch (error) {
+          console.error('Error al actualizar los datos del perfil:', error);
+          document.getElementById('mensajeSN').innerText = "Error al actualizar los datos del perfil";
+        }
+      });
+    </script>
+  </body>
+</html>

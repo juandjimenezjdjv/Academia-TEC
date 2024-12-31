@@ -1,0 +1,131 @@
+.containera {
+    background-color: #ffffff;
+}
+
+.middlea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tutoria-detalles {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 40px;
+}
+
+.tutoria-detalles-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+.tutoria-img-container {
+    flex: 1;
+    max-width: 400px;
+    margin-right: 20px;
+    margin: auto 0;
+}
+
+.tutoria-info-container {
+    flex: 2;
+    margin-right: 20px;
+    max-width: 450px;
+}
+
+.tutoria-detalles img {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.tutoria-detalles-dark-container {
+    position: relative;
+    width: 100%;
+}
+
+.tutoria-detalles-dark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2d2f3146;
+    height: 200px;
+    color: (255, 255, 255);
+    padding: 20px;
+    box-sizing: border-box;             
+    margin-top: 20px;
+}
+
+.tutoria-detalles-dark .tutoria-info-container {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.custom-btn {
+    background: #ffffff;    
+    width: 100%;
+    border-radius: 25px;
+    font-family: 'Oxygen', sans-serif;
+    color: #2d2f31;
+    padding: 12px 30px;    
+    text-align: center;
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+    display: inline-block;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    margin: 0px;
+}
+
+.custom-btn:hover {
+    text-decoration: none;
+    border-radius: 20px;
+    background: #2d2f31;
+    color: #ffffff;
+    border-color: #2d2f31;
+}
+
+.random-tutorias {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;    
+    gap: 20px;
+}
+
+.random-tutorias .tutoria-card {
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 10px;
+    width: calc(29% - 30px);
+    text-align: center;
+    text-decoration: none;
+    color: #2d2f31;
+}
+.tutoria-card:hover {
+    box-shadow: 0 4px 8px #2d2f316b;
+    color: inherit;
+    text-decoration: none;
+}
+
+.random-tutorias .tutoria-card img {
+    max-width: 270px;
+    height: auto;
+    width: 100%;
+    border-radius: 10px;
+
+}
+
+.random-tutorias .tutoria-card h3 {
+    color: #2d2f31;
+}
+
+.random-tutorias .tutoria-card p {
+    color: #2d2f31;
+}

@@ -1,0 +1,74 @@
+.random-cursos {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.tutoria-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.curso-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  background-color: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.curso-card:hover {
+  box-shadow: 0 4px 8px #2d2f31;
+  color: inherit;
+}
+.curso-card img {
+  max-width: 100%;
+  border-radius: 8px 8px 0 0;
+}
+.curso-card h2, .tutoria-card p {
+  color: #2d2f31;
+}
+.curso-card h2 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+.curso-card p {
+  margin: 8px 0;
+}
+
+.random-profesores {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.profesor-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  background-color: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.profesor-card:hover {
+  box-shadow: 0 4px 8px #2d2f31;
+  color: inherit;
+}
+
+.profesor-card img {
+  max-width: 100%;
+  border-radius: 8px 8px 0 0;
+}
+
+.profesor-card p {
+  margin: 8px 0;
+  color: #2d2f31; /* Asegura que el texto sea visible */
+  text-decoration: none;
+}

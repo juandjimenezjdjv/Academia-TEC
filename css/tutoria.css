@@ -1,0 +1,38 @@
+.tutoria-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+}
+.tutoria-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 285px;
+    text-align: center;
+    background-color: #fff;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    text-align: left;
+}
+.tutoria-card:hover {
+    box-shadow: 0 4px 8px #2d2f316b;
+    color: inherit;
+    text-decoration: none;
+}
+.tutoria-card img {
+    max-width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+.tutoria-card h2, .tutoria-card p {
+    color: #2d2f31; /* Asegura que el texto sea visible */
+}
+.tutoria-card h2 {
+  padding-left: 10px;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+.tutoria-card p {
+  padding-left: 10px;
+    margin: 8px 0;
+}

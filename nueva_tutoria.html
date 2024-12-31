@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AcademiaTEC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/formularios.css">
+    <link rel="stylesheet" href="css/sesiones.css">
+    <link rel="icon" href="img/ATicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="top">
+      <ul>
+        <li>
+          <a href="index.html">
+            <img src="img/logo-home.png" alt="Inicio" class="logo">
+          </a>
+        </li>
+        <li><a href="index.html" class="btn-top">Página de inicio</a></li>
+        <li><a href="tutorias.html" class="btn-top">Tutorías</a></li>
+        <li><a href="contactenos.html" class="btn-top">Contáctenos</a></li>
+        <li><a href="nueva_tutoria.html" class="btn-top">Nueva tutoría</a></li>
+        <li>
+          <a href="nueva_tutoria.html" id="openPopup">
+            <img src="img/register.png" alt="Registro" class="logo">
+          </a>
+        </li>
+        <li>
+          <a href="mis_tutorias.html">
+            <img src="img/mis-tutorias.png" alt="Mis tutorías" class="logo">
+          </a>
+        </li>
+      </ul>
+    </div>
+          
+    <div class="popup-wrapper" id="popupWrapper" style="display: none;">
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close" id="closePopup">&times;</span>
+          <div class="centrado">
+            <h2><strong>¡Bienvenido!</strong></h2>
+            <a class="custom-btn" href="perfil_config.html" id="vperfil">Ver perfil</a><br>
+            <a class="custom-btn" href="iniciosesion.html" id="inisesion">Iniciar sesión</a><br>
+            <a class="custom-btn-white" href="crearcuenta.html" id="crearsesion">Crear cuenta</a></br>
+            <a class="custom-btn" href="index.html" id="Scerrarsesion">Cerrar sesion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-forms">
+      <div class="middle">
+        <div>
+          <h2><strong>Nueva tutoría</strong></h2>
+        </div>
+        <p class="p">Agregue los datos de la nueva tutoría.</p>
+      </br>
+        <p class="p"><strong>Información de cuenta</strong></p>
+        <div class="container-forms">
+          <div class="form-section">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <label for="ntutoria">Nombre de tutoría:</label>
+                <input type="text" id="ntutoria" name="ntutoria">
+              </div>
+              <div class="form-field">
+                <label for="nprecio">Precio de la tutoría (₡/hora):</label>
+                <input type="number" id="nprecio" name="nprecio">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-forms">
+          <div class="form-section">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <label for="nenlace">Enlace para tutoría:</label>
+                <input type="text" id="nenlace" name="nenlace">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-forms">
+          <div class="form-section">
+            <div class="form-row-inline">
+              <div class="form-field">                
+                <label for="categoriat">Categoría de la tutoría:</label>
+                <div class="day-checkbox-container">
+                  <select id="categoriat" name="categoriat">
+                    <option value=""></option>
+                  </select>
+                </div>
+              </div>              
+            </div>
+          </div>
+        </div>
+        <p class="p"><strong>Descripción de la tutoría:</strong></p>
+        <div class="container-forms">
+          <div class="form-section-50">
+            <div class="form-row-inline">
+              <div class="form-field">
+                <textarea id="descripciontut" name="descripciontut" rows="5" cols="50"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+        <div class="container-forms">
+          <a class="custom-btn" href="index.html" id="abrirtutoria">Abrir tutoría</a>
+        </div><br>
+        <div class="container-forms">
+          <a class="custom-btn-white" href="nueva_tutoria.html" id="cancelarcambios">Cancelar cambios</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esto esta bien, asi deben ser todos los bottom -->
+    <div style="text-align: center;" class="bottom">
+      <img  src="img/logo.png" alt="logo photo">
+      <p class="text-bottom">Únete a nuestra comunidad de aprendizaje en línea.</p>
+      <hr style="border-top: 0.1px  white; width: 100%;">
+      <p class="copyr">Copyrigth © 2024 AcademiaTEC</p>
+    </div> 
+      
+    <script src="js/script.js"></script>
+    <script>
+      async function loadCategorias() {
+        try {
+          const response = await fetch('http://localhost:1434/categorias'); 
+          const categorias = await response.json();
+          const select = document.getElementById('categoriat');
+
+          categorias.forEach(categoria => {
+            const option = document.createElement('option');
+            option.value = categoria.intereses;
+            option.textContent = categoria.nombreCategoria;
+            select.appendChild(option);
+          });
+        } catch (error) {
+          console.error('Error al cargar las categorías:', error);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', loadCategorias);
+
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const sessionData = JSON.parse(sessionStorage.getItem('usuario'));
+        const createTutoriaButton = document.getElementById('abrirtutoria');
+        if(!sessionData){
+          alert('Inicie sesión como profesor para crear una nueva tutoría.');
+          window.location.href = 'index.html';
+        }
+        if (sessionData.rol !== 1) {
+          createTutoriaButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('Solo los profesores pueden crear una nueva tutoría.');
+            window.location.href = 'index.html';
+          });
+        } else {
+          createTutoriaButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            const nombreTutoria = document.getElementById('ntutoria').value;
+            const profesor = sessionData.correo;
+            const rol = sessionData.rol;
+            const enlace = document.getElementById('nenlace').value;
+            const precio = document.getElementById('nprecio').value;
+            const intereses = document.getElementById('categoriat').value;
+            const descripcion = document.getElementById('descripciontut').value;
+              
+            fetch('http://localhost:1434/crearTutoria', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                nombreTutoria,
+                correoTutor: profesor,
+                enlace,
+                precio,
+                intereses,
+                rol,
+                descripcion
+              })
+            })
+            .then(response => response.json())
+            .then(data => {
+              alert(data.mensaje);
+              window.location.href = 'index.html';
+            })
+            .catch(error => console.error('Error:', error));
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

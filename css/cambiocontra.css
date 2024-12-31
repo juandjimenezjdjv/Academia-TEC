@@ -1,0 +1,25 @@
+.custom-btn {
+    background: #2d2f31;    
+    width: 40%;
+    border-radius: 25px;
+    font-family: 'Oxygen', sans-serif;
+    color: #ffffff;
+    padding: 12px 30px;    
+    text-align: center;
+    text-decoration: none;
+    border-width: 1px;
+    border-style: solid;
+    display: inline-block;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: center;
+    margin: 0px;
+}
+
+.custom-btn:hover {
+    text-decoration: none;
+    border-radius: 20px;
+    background: #ffffff;
+    color: #2d2f31;
+    border-color: #2d2f31;
+}

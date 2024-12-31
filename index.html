@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AcademiaTEC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/formularios.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="img/ATicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    <div class="top">
+      <ul>
+        <li>
+          <a href="index.html">
+            <img src="img/logo-home.png" alt="Inicio" class="logo">
+          </a>
+        </li>
+        <li><a href="index.html" class="btn-top">Página de inicio</a></li>
+        <li><a href="tutorias.html" class="btn-top">Tutorías</a></li>
+        <li><a href="contactenos.html" class="btn-top">Contáctenos</a></li>
+        <li><a href="nueva_tutoria.html" class="btn-top">Nueva tutoría</a></li>
+        <li>
+          <a href="index.html" id="openPopup">
+            <img src="img/register.png" alt="Registro" class="logo">
+          </a>
+        </li>
+        <li>
+          <a href="mis_tutorias.html">
+            <img src="img/mis-tutorias.png" alt="Mis tutorías" class="logo">
+          </a>
+        </li>
+      </ul>
+    </div>
+          
+    <div class="popup-wrapper" id="popupWrapper" style="display: none;">
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close" id="closePopup">&times;</span>
+          <div class="centrado">
+            <h2><strong>¡Bienvenido!</strong></h2>
+            <a class="custom-btn" href="perfil_config.html" id="vperfil">Ver perfil</a><br>
+            <a class="custom-btn" href="iniciosesion.html" id="inisesion">Iniciar sesión</a><br>
+            <a class="custom-btn-white" href="crearcuenta.html" id="crearsesion">Crear cuenta</a></br>
+            <a class="custom-btn" href="index.html" id="Scerrarsesion">Cerrar sesion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="middle-dark">
+      <div class="container">
+        <div class="middle-dark">
+          <div class="centrado">
+            <h1 class="white">¡¡Aprende de manera más inteligente, no más difícil, con nuestra ayuda!!</h1>
+            <h3 class="white-short">Bienvenidos todos los estudiantes que, buscando una mejor calificación, el destino los trajo hasta aquí. Adelante, y espero que disfruten nuestra compañía.</h3>
+            <div class="search-container">
+              <form id="searchForm" onsubmit="handleSearch(event)">
+                <input type="text" id="searchBox" name="q" class="search-box" placeholder="Buscar tutorías">
+                <button type="submit" class="search-button">
+                  <img src="img/lupa.png" alt="Buscar" width="20" height="20">
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="middle">
+        <div>
+          <h2><strong>Algunas opciones</strong></h2>
+        </div>
+        <div class="content">
+          <p>Aquí se puede encontrar información relevante, como disponibilidad y precios de las tutorías. Más abajo están algunas presentaciones de nuestros profesores, para que los conozcan mejor.</p>
+          <a class="custom-btn" href="tutorias.html">Ver todas<i class="icono"> > </i></a>
+        </div>
+        </br>
+        <div id="cursosContainer" class="random-cursos"></div>
+        </br>
+      </div>
+    </div>
+
+    <div class="middle-dark" style="background-image: url('img/background.png'); height: 500px;">
+      <div class="container">
+          <div class="centrado">
+            <h2 class="white-witdh"><strong>Este proyecto nace de los deseos de una profesora peculiar, una gran mujer que quería alinear su interés de cuidar a sus hijos y su deseo de seguir enseñando. De ahí es donde nace AcademiaTec. Les agradecemos por formar parte.</strong></h2>
+          </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="middle" style="width: 100%;">
+        <div class="centrado">
+          <h2><strong>Conoce a nuestros profesores</strong></h2>
+        </div>
+        <div id="profesoresContainer" class="random-profesores"></div>        
+        </br>
+      </div>
+    </div>
+        
+      <!-- Esto esta bien, asi deben ser todos los bottom -->
+    <div style="text-align: center;" class="bottom">
+      <img  src="img/logo.png" alt="logo photo">
+      <p class="text-bottom">Únete a nuestra comunidad de aprendizaje en línea.</p>
+      <hr style="border-top: 0.1px  white; width: 100%;">
+      <p class="copyr">Copyrigth © 2024 AcademiaTEC</p>
+    </div> 
+    
+    <script src="js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        obtenerCursosAleatorios();
+        obtenerProfesoresAleatorios();
+      });
+  
+      async function obtenerCursosAleatorios() {
+        try {
+          const response = await fetch("http://localhost:1434/obtenerTutorias");
+          if (response.ok) {
+            const tutorias = await response.json();
+            mostrarCursosAleatorios(tutorias);
+          } else {
+            console.error("Error al obtener los cursos:", response.status);
+          }
+        } catch (error) {
+          console.error("Error al obtener los cursos:", error);
+        }
+      }
+  
+      async function obtenerProfesoresAleatorios() {
+        try {
+          const response = await fetch("http://localhost:1434/obtenerProfesores");
+          if (response.ok) {
+            const profesores = await response.json();
+            mostrarProfesoresAleatorios(profesores);
+          } else {
+            console.error("Error al obtener los profesores:", response.status);
+          }
+        } catch (error) {
+          console.error("Error al obtener los profesores:", error);
+        }
+      }
+  
+      async function mostrarCursosAleatorios(tutorias) {
+        const cursosContainer = document.getElementById("cursosContainer");
+        const cursosAleatorios = obtenerAleatorios(tutorias, 3);
+  
+        for (const curso of cursosAleatorios) {
+          try {
+            const response = await fetch(`http://localhost:1434/obtenerProfesor/${curso.CorreoTutor}`);
+            if (response.ok) {
+              const profesor = await response.json();
+              const cursoCard = document.createElement('a');
+              cursoCard.href = `tutoria_unica.html?id=${curso.TutoriaID}`;
+              cursoCard.classList.add('curso-card');
+              cursoCard.innerHTML = `
+                <img src="img/cate/${curso.Intereses}.jpg" alt="${curso.NombreTutoria}">
+                <h2>${curso.NombreTutoria}</h2>
+                <p>Profesor: ${profesor.Nombre}</p>
+                <p>Precio: ${curso.Precio}</p>
+                <p>Descripcion: ${curso.Descripcion}</p>
+              `;
+              cursosContainer.appendChild(cursoCard);
+            } else {
+              console.error("Error al obtener el profesor:", response.status);
+            }
+          } catch (error) {
+            console.error("Error al obtener el profesor:", error);
+          }
+        }
+      }
+  
+      function mostrarProfesoresAleatorios(profesores) {
+        const profesoresContainer = document.getElementById("profesoresContainer");
+        const profesoresAleatorios = obtenerAleatorios(profesores, 3);
+
+        profesoresAleatorios.forEach(profesor => {
+          const profesorCard = document.createElement('div');
+          profesorCard.classList.add('profesor-card');
+          profesorCard.innerHTML = `
+            <img src="img/prof/${profesor.Intereses}.jpg" alt="${profesor.Nombre}">
+            <p>Profesor: ${profesor.Nombre}</p>
+            <p>Descripcion: ${profesor.Descripcion}</p>
+          `;
+          profesoresContainer.appendChild(profesorCard);
+        });
+      }
+
+      function obtenerAleatorios(array, cantidad) {
+        const copiaArray = array.slice();
+        const resultados = [];
+        for (let i = 0; i < cantidad && copiaArray.length > 0; i++) {
+          const indiceAleatorio = Math.floor(Math.random() * copiaArray.length);
+          resultados.push(copiaArray.splice(indiceAleatorio, 1)[0]);
+        }
+        return resultados;
+      }
+
+      function handleSearch(event) {
+        event.preventDefault();
+        const searchTerm = document.getElementById('searchBox').value;
+        window.location.href = `tutorias.html?q=${encodeURIComponent(searchTerm)}`;
+      }
+    </script>
+  </body>
+</html>

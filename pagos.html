@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AcademiaTEC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/formularios.css">
+    <link rel="stylesheet" href="css/pagos.css">
+    <link rel="icon" href="img/ATicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top">
+    <ul>
+      <li><a href="index.html"><img src="img/logo-home.png" alt="Inicio" class="logo"></a></li>
+      <li><a href="index.html" class="btn-top">Página de inicio</a></li>
+      <li><a href="tutorias.html" class="btn-top">Tutorías</a></li>
+      <li><a href="contactenos.html" class="btn-top">Contáctenos</a></li>
+      <li><a href="nueva_tutoria.html" class="btn-top">Nueva tutoría</a></li>
+      <li><a href="pagos.html" id="openPopup"><img src="img/register.png" alt="Registro" class="logo"></a></li>
+      <li><a href="mis_tutorias.html"><img src="img/mis-tutorias.png" alt="Mis tutorías" class="logo"></a></li>
+    </ul>
+  </div>
+
+  <div class="popup-wrapper" id="popupWrapper" style="display: none;">
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <span class="close" id="closePopup">&times;</span>
+        <div class="centrado">
+          <h2><strong>¡Bienvenido!</strong></h2>
+          <a class="custom-btn" href="perfil_config.html" id="vperfil">Ver perfil</a><br>
+          <a class="custom-btn" href="iniciosesion.html" id="inisesion">Iniciar sesión</a><br>
+          <a class="custom-btn-white" href="crearcuenta.html" id="crearsesion">Crear cuenta</a></br>
+          <a class="custom-btn" href="index.html" id="Scerrarsesion">Cerrar sesion</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-wrapper" id="paymentPopupWrapper" style="display: none;">
+    <div id="paymentPopup" class="popup">
+      <div class="popup-content">
+        <span class="close" id="closePaymentPopup">&times;</span>
+        <div class="centrado">
+          <h2><strong>Proceder al pago</strong></h2>
+          <p>Detalles del pago aquí (escribir número de comprobante)...</p>
+          <p>Número a depositar (+506) 8888 2233...</p>
+            <div class="form-field-f330">
+              <input type="text" id="compobantepago" name="compobantepago"><br>
+            </div>
+          </br>
+          <a class="custom-btn" id="makePayment">Hacer el pago</a><br>
+          <a class="custom-btn-white" href="#" id="cancelPayment">Cancelar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="middle">
+      <div class="card">
+          <h2>Detalles de la Tutoría</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Tutoría</th>
+              <th>Precio por hora</th>
+              <th>Hora</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="tutoriaName">Nombre de la tutoría</td>
+              <td id="pricePerHour">₡ 0.00</td>
+              <td>
+                <select id="hourSlect">
+                  <option value="06:00">06:00</option>
+                  <option value="07:00">07:00</option>
+                  <option value="08:00">08:00</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                </select>
+              </td>
+              <td id="totalPrice">₡ 0.00</td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <h3>Seleccione el dia de la tutoría:</h3>
+          <div id="diasTutoria">
+            <label><input type="checkbox" value="Lunes" class="daySlect">Lunes</label>
+            <label><input type="checkbox" value="Martes" class="daySlect">Martes</label>
+            <label><input type="checkbox" value="Miércoles" class="daySlect">Miércoles</label>
+            <label><input type="checkbox" value="Jueves" class="daySlect">Jueves</label>
+            <label><input type="checkbox" value="Viernes" class="daySlect">Viernes</label>
+            <label><input type="checkbox" value="Sábado" class="daySlect">Sábado</label>
+          </div>
+          </br>
+          <h3 id="diaSeleccionado">¡Aqui aparecerá la fecha!</h3>
+        </div>
+        </br></br>
+        <div>
+          <h3>Pago Honorífico</h3>
+          <p>¿Cuánto desea dejar como pago honorífico al profesor?</p>
+          ₡ <input type="number" id="honorarios" value="300" step="50" min="0"> 
+        </div>
+      </div>
+      <div class="card">
+        <h2>Disponibilidad del Profesor</h2>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <label>Días: </label> 
+                <label>Lunes<input type="checkbox" value="L" class="daySelect" disabled> | </label>
+                <label>Martes<input type="checkbox" value="K" class="daySelect" disabled> | </label>
+                <label>Miércoles<input type="checkbox" value="M" class="daySelect" disabled> | </label>
+                <label>Jueves<input type="checkbox" value="J" class="daySelect" disabled> | </label>
+                <label>Viernes<input type="checkbox" value="V" class="daySelect" disabled> | </label>
+                <label>Sábado<input type="checkbox" value="S" class="daySelect" disabled></label>
+              </td>
+            </tr>
+            <tr>
+              <td id="dispoProfe">Horas: 8am - 5pm</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h2>Pago Total</h2>
+        <table>
+          <tbody>
+            <tr>
+              <td id="finalTotal">TOTAL: ₡ 0.00</td>
+            </tr>
+            <tr>
+              <td><button class="btn" id="proceedButton">Proceder al pagar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <img src="img/logo.png" alt="logo photo">
+    <p class="text-bottom">Únete a nuestra comunidad de aprendizaje en línea.</p>
+    <hr style="border-top: 0.1px white; width: 100%;">
+    <p class="copyr">Copyrigth © 2024 AcademiaTEC</p>
+  </div> 
+
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var checkboxes = document.querySelectorAll('.daySlect');
+      var today = new Date();
+      var currentDay = today.getDay();
+      for (var i = 0; i < currentDay; i++) {
+          checkboxes[i].disabled = true;
+      }
+        
+      checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+          checkboxes.forEach(function(otherCheckbox) {
+            if (otherCheckbox !== checkbox) {
+              otherCheckbox.checked = false;
+            }
+          });
+              
+          if (this.checked) {
+            var selectedDayIndex = Array.from(checkboxes).indexOf(this);
+            var daysUntilSelectedDay = (currentDay <= selectedDayIndex) ? selectedDayIndex - currentDay : 7 - currentDay + selectedDayIndex + 1;
+            var selectedDate = new Date();
+            selectedDate.setDate(today.getDate() + daysUntilSelectedDay+1);
+            var formattedDate = selectedDate.getFullYear() + '-' + ('0' + (selectedDate.getMonth() + 1)).slice(-2) + '-' + ('0' + selectedDate.getDate()).slice(-2);
+            document.querySelector('#diaSeleccionado').textContent = formattedDate;
+          } else {
+            document.querySelector('#diaSeleccionado').textContent = '¡Aqui aparecerá la fecha!';
+          }         
+        });
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', async function () {
+      const params = new URLSearchParams(window.location.search);
+      const tutoriaId = params.get('tutoriaId');
+      var profesorCorreo='';
+      if (tutoriaId) {
+        try {
+          const response = await fetch(`http://localhost:1434/obtenerTutoria/${tutoriaId}`);
+          if (response.ok) {
+            const tutoria = await response.json();
+            // console.table(tutoria)
+            profesorCorreo = tutoria.CorreoTutor
+            document.querySelector('td#tutoriaName').textContent = tutoria.NombreTutoria;
+            document.querySelector('td#pricePerHour').textContent = `₡${tutoria.Precio}`;
+            calculateTotal();
+          } else {
+            console.error("Error al obtener la tutoría");
+          }
+        } catch (error) {
+          console.error("Error de red:", error);
+        }
+      } else {
+        console.error("No se encontró el ID de la tutoría en la URL");
+      }
+
+      if (profesorCorreo) {
+        try {
+          const response = await fetch(`http://localhost:1434/obtenerProfesor/${profesorCorreo}`);
+          if (response.ok) {
+            const profesor = await response.json();
+            document.querySelector('.daySelect[value="L"]').checked = profesor.Lunes;
+            document.querySelector('.daySelect[value="K"]').checked = profesor.Martes;
+            document.querySelector('.daySelect[value="M"]').checked = profesor.Miercoles;
+            document.querySelector('.daySelect[value="J"]').checked = profesor.Jueves;
+            document.querySelector('.daySelect[value="V"]').checked = profesor.Viernes;
+            document.querySelector('.daySelect[value="S"]').checked = profesor.Sabado;
+
+            const daysMapping = {
+              'Lunes': 'Lunes',
+              'Martes': 'Martes',
+              'Miércoles': 'Miércoles',
+              'Jueves': 'Jueves',
+              'Viernes': 'Viernes',
+              'Sábado': 'Sábado'
+            };
+            for (const [key, day] of Object.entries(daysMapping)) {
+              const dayElement = document.querySelector(`.daySlect[value="${key}"]`);
+              if (!profesor[day]) {
+                dayElement.disabled = true;
+              }
+            }
+
+            const formatTime = (time) => {
+              const date = new Date(time);
+              return date.toISOString().substr(11, 5);
+            };
+            document.querySelector('td#dispoProfe').textContent = `Horas: ${formatTime(profesor.HoraInicio)} - ${formatTime(profesor.HoraFin)}`;
+            // Filtrar horas disponibles en el select
+            const hourSelect = document.getElementById('hourSlect');
+            const startHour = parseInt(formatTime(profesor.HoraInicio));
+            const endHour = parseInt(formatTime(profesor.HoraFin));
+
+            Array.from(hourSelect.options).forEach(option => {
+              const hour = parseInt(option.value.split(':')[0], 10);
+              if (hour < startHour || hour > endHour) {
+                option.disabled = true;
+              }
+            });
+          
+          } else {
+            console.error("Error al obtener los detalles del profesor");
+          }
+        } catch (error) {
+          console.error("Error de red:", error);
+        }
+      } else {
+        console.error("No se encontró el correo del profesor en la URL");
+      }
+    });
+
+    function calculateTotal() {
+      const pricePerHourElement = document.getElementById('pricePerHour');
+      if (!pricePerHourElement) return;
+
+      const pricePerHour = parseFloat(pricePerHourElement.textContent.replace('₡', '')) || 0;
+      const honorariosInput = document.getElementById('honorarios');
+      const daySelects = document.querySelectorAll('.daySlect');
+      const totalPrice = document.getElementById('totalPrice');
+      const finalTotal = document.getElementById('finalTotal');
+
+      function calculate() {
+        const selectedDays = Array.from(daySelects).filter(cb => cb.checked).length;
+        const honorarios = parseFloat(honorariosInput.value) || 0;
+        const total = (pricePerHour * selectedDays) + honorarios;
+        totalPrice.textContent = `₡ ${total}`;
+        finalTotal.textContent = `TOTAL: ₡ ${total}`;
+      }
+
+      daySelects.forEach(cb => cb.addEventListener('change', calculate));
+      honorariosInput.addEventListener('input', calculate);
+      calculate();
+    }
+
+    document.getElementById('proceedButton').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('paymentPopupWrapper').style.display = 'block';
+    });
+    document.getElementById('closePaymentPopup').addEventListener('click', function() {
+      document.getElementById('paymentPopupWrapper').style.display = 'none';
+    });
+    document.getElementById('paymentPopup').addEventListener('click', function(event) {
+      event.stopPropagation();
+    });
+    document.getElementById('paymentPopupWrapper').addEventListener('click', function() {
+      document.getElementById('paymentPopupWrapper').style.display = 'none';
+    });
+    document.getElementById('cancelPayment').addEventListener('click', function(event) {
+      event.preventDefault();
+      document.getElementById('paymentPopupWrapper').style.display = 'none';
+    });
+
+
+
+    document.getElementById('makePayment').addEventListener('click', async function() {
+      const user = JSON.parse(sessionStorage.getItem('usuario'));
+      const params = new URLSearchParams(window.location.search);
+      const tutoriaId = params.get('tutoriaId');
+      var profesorCorreo='';
+      let tutoria = {};
+      if (tutoriaId) {
+        try {
+          const response = await fetch(`http://localhost:1434/obtenerTutoria/${tutoriaId}`);
+          if (response.ok) {
+            tutoria = await response.json();
+            profesorCorreo = tutoria.CorreoTutor
+          } else {
+            console.error("Error al obtener la tutoría");
+          }
+        } catch (error) {
+          console.error("Error de red:", error);
+        }
+      } else {
+        console.error("No se encontró el ID de la tutoría en la URL");
+      }
+      let profesor = {};
+      if (profesorCorreo) {
+        try {
+          const response = await fetch(`http://localhost:1434/obtenerProfesor/${profesorCorreo}`);
+          if (response.ok) {
+            profesor = await response.json();
+          } else {
+            console.error("Error al obtener los detalles del profesor");
+          }
+        } catch (error) {
+          console.error("Error de red:", error);
+        }
+      } else {
+        console.error("No se encontró el correo del profesor en la URL");
+      }
+      const comprobante = document.getElementById('compobantepago').value;
+      const diaSeleccionado = document.getElementById('diaSeleccionado').textContent;
+
+      const totalWithCurrency = document.getElementById('totalPrice').textContent;
+      const totalWithoutCurrency = totalWithCurrency.replace('₡', '');
+      const total = parseFloat(totalWithoutCurrency);
+      console.log(tutoria.NombreTutoria);
+      console.log(comprobante, diaSeleccionado, total);
+      console.log(total, tutoria.TutoriaID, tutoria.Enlace, user.correo);
+
+      var selectDate = new Date();
+      var formattedDate = selectDate.getFullYear() + '-' + ('0' + (selectDate.getMonth() + 1)).slice(-2) + '-' + ('0' + selectDate.getDate()).slice(-2);
+
+      try {
+        const matriculaResponse = await fetch('http://localhost:1434/insertarMatricula', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            TutoriaID: tutoria.TutoriaID,
+            Tutoria: tutoria.NombreTutoria,
+            Fecha: diaSeleccionado,
+            Hora: document.getElementById('hourSlect').value,
+            EnlaceClase: tutoria.Enlace,
+            EstudianteCorreo: user.correo,
+            Comprobante: comprobante,
+            FechaPago: formattedDate,
+            Monto: total
+          })
+        });
+        const matriculaData = await matriculaResponse.json();
+        if (matriculaData.mensaje === "Matriculado exitosamente") {
+          alert('Matrícula aceptada!');
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 100);
+        } else {
+          alert(matriculaData.mensaje);
+          console.log("Account creation failed");
+        }
+      } catch (error) {
+        console.error('Error al realizar la matrícula y el pago:', error);
+        document.getElementById('mensajeSN').innerText = "Error al realizar la matrícula y el pago";
+      }
+    });
+  </script>
+</body>
+</html>

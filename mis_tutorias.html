@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AcademiaTEC</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/botones.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/formularios.css">
+    <link rel="stylesheet" href="css/historial.css">
+    <link rel="icon" href="img/ATicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="top">
+      <ul>
+        <li>
+          <a href="index.html">
+            <img src="img/logo-home.png" alt="Inicio" class="logo">
+          </a>
+        </li>
+        <li><a href="index.html" class="btn-top">Página de inicio</a></li>
+        <li><a href="tutorias.html" class="btn-top">Tutorías</a></li>
+        <li><a href="contactenos.html" class="btn-top">Contáctenos</a></li>
+        <li><a href="nueva_tutoria.html" class="btn-top">Nueva tutoría</a></li>
+        <li>
+          <a href="mis_tutorias.html" id="openPopup">
+            <img src="img/register.png" alt="Registro" class="logo">
+          </a>
+        </li>
+        <li>
+          <a href="mis_tutorias.html">
+            <img src="img/mis-tutorias.png" alt="Mis tutorías" class="logo">
+          </a>
+        </li>
+      </ul>
+    </div>
+          
+    <div class="popup-wrapper" id="popupWrapper" style="display: none;">
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="close" id="closePopup">&times;</span>
+          <div class="centrado">
+            <h2><strong>¡Bienvenido!</strong></h2>
+            <a class="custom-btn" href="perfil_config.html" id="vperfil">Ver perfil</a><br>
+            <a class="custom-btn" href="iniciosesion.html" id="inisesion">Iniciar sesión</a><br>
+            <a class="custom-btn-white" href="crearcuenta.html" id="crearsesion">Crear cuenta</a></br>
+            <a class="custom-btn" href="index.html" id="Scerrarsesion">Cerrar sesion</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container">
+      <div class="middle">
+        <div>
+          <h2><strong>Tutorías e historial del pagos</strong></h2>
+        </div>
+        <p class="p">Tutorías por llevar e historial de pagos y precio.</p>
+      </div>
+    </div>
+    <div class="middle">
+      <div class="container">
+        <div class="historial">
+          <div class="grid-historial-black">
+            <div>Tutoría</div>
+            <div>Disponible</div>
+            <div>Enlace a tutoría</div>
+            <div>Día de compra</div>
+            <div>Precio</div>
+          </div>
+          <div class="grid-historial-white" id="matriculasPagadas">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Aqui resto del codigo -->
+    <div class="container">
+      <div class="derecha">
+        <div style="display: flex; justify-content: right; margin-bottom: 20px; margin-top: 10px; margin-right: 0px;">
+          <a class="custom-btn" id="EnviarInformeCuenta">Generar informe de cuenta</a><br>
+        </div>
+      </div>
+    </div>
+      <!-- Esto esta bien, asi deben ser todos los bottom -->
+    <div style="text-align: center;" class="bottom">
+      <img  src="img/logo.png" alt="logo photo">
+      <p class="text-bottom">Únete a nuestra comunidad de aprendizaje en línea.</p>
+      <hr style="border-top: 0.1px  white; width: 100%;">
+      <p class="copyr">Copyrigth © 2024 AcademiaTEC</p>
+    </div>
+      
+    <script src="js/script.js"></script>
+    <script>
+      async function datosMatricula() {
+        const user = JSON.parse(sessionStorage.getItem('usuario'));
+        const email = user.correo;
+        const rol = user.rol;
+        const contraaaa = user.contrasena;
+
+        if (!email || !rol) {
+          console.error("No hay información de usuario en sessionStorage");
+          return;
+        }
+
+        try {
+          const response = await fetch('http://localhost:1434/datosMatricula', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+          }
+          const data = await response.json();
+          return data;
+          console.log("Datos de matricula obtenidos:", data);
+        } catch (error) {
+          console.error('Error al cargar los datos del perfil:', error);
+        }
+      }
+      let actualizandoMatriculas = false;
+    
+      async function actualizarMatriculas(categoriaSeleccionada = null) {
+        const user = JSON.parse(sessionStorage.getItem('usuario'));
+        const email = user.correo;
+        const rol = user.rol;
+        const contraaaa = user.contrasena;
+
+        if (!email || !rol) {
+          console.error("No hay información de usuario en sessionStorage");
+          return;
+        }
+
+        try {
+          if (!actualizandoMatriculas) {
+            actualizandoMatriculas = true;
+    
+            let MatriculasT = JSON.parse(sessionStorage.getItem('Matriculas'));
+            const matriculasPagadas = document.getElementById("matriculasPagadas");
+    
+            if (Array.isArray(MatriculasT) && MatriculasT.length > 0) {
+              matriculasPagadas.innerHTML = "";
+              for (const tutoria of MatriculasT) {
+                if (tutoria.EstudianteCorreo === email) {
+                  let tutoriaFecha = tutoria.Fecha;
+                  let tutoriaHora = tutoria.Hora;
+                  let soloFecha = tutoriaFecha.split('T')[0];
+                  let soloHora = tutoriaHora.split('T')[1].split('.')[0];
+                  let fechaActual = tutoria.FechaPago;
+                  let fechactual = fechaActual.split('T')[0];
+
+                    const tutoriaElement = document.createElement('div');
+                    const tutoriaElement2 = document.createElement('div');
+                    const tutoriaElement3 = document.createElement('div');
+                    const tutoriaElement4 = document.createElement('div');
+                    const tutoriaElement5 = document.createElement('div');
+
+                    tutoriaElement.innerHTML = `
+                        <div>${tutoria.NomTutoria}</div>
+                    `;
+                    tutoriaElement2.innerHTML = `
+                        <div>${soloFecha}</div>
+                        <div>${soloHora}</div>
+                    `;
+
+                    // Obtener la fecha y hora actual
+                    let ahora = new Date();
+                    let fechaTutoria = new Date(tutoriaFecha);
+                    fechaTutoria.setHours(soloHora.split(':')[0], soloHora.split(':')[1], soloHora.split(':')[2]);
+
+                    // Añadir 45 minutos a la hora de inicio de la tutoría
+                    let finDisponibilidadTutoria = new Date(fechaTutoria);
+                    finDisponibilidadTutoria.setMinutes(fechaTutoria.getMinutes() + 45);
+
+                    // Comparar la fecha y hora de la tutoría con la actual
+                    let enlaceActivo = ahora >= fechaTutoria && ahora <= finDisponibilidadTutoria;
+                    
+                    tutoriaElement3.innerHTML = `
+                      <div><a href="${tutoria.EnlaceClase}" ${enlaceActivo ? '' : 'style="pointer-events: none; color: gray;"'}>${tutoria.EnlaceClase}</a></div>
+                    `;
+                    tutoriaElement4.innerHTML = `
+                      <div>${fechactual}</div>
+                    `;
+                    tutoriaElement5.innerHTML = `
+                      <div>₡${tutoria.Monto}</div>
+                    `;
+                    
+                    matriculasPagadas.appendChild(tutoriaElement);
+                    matriculasPagadas.appendChild(tutoriaElement2);
+                    matriculasPagadas.appendChild(tutoriaElement3);
+                    matriculasPagadas.appendChild(tutoriaElement4);
+                    matriculasPagadas.appendChild(tutoriaElement5);
+                }
+              }
+            } else {
+              console.error("Error: No se pudieron obtener las tutorías");
+            }    
+            actualizandoMatriculas = false;
+          } else {
+            console.log("La actualización de las tutorías ya está en curso.");
+          }
+        } catch (error) {
+          console.error("Error al actualizar matriculas:", error);
+          actualizandoMatriculas = false;
+        }
+      }
+      
+      document.addEventListener('DOMContentLoaded', async function() {        
+        const Matricula = await datosMatricula();
+        sessionStorage.setItem('Matriculas', JSON.stringify(Matricula));
+        actualizarMatriculas();
+      });
+
+
+      document.getElementById('EnviarInformeCuenta').addEventListener('click', async function() {
+        const user = JSON.parse(sessionStorage.getItem('usuario'));
+        const email = user.correo;
+        let MatriculasT = JSON.parse(sessionStorage.getItem('Matriculas'));
+        let mensajePagos = "";
+        let cont = 1;
+
+        if (Array.isArray(MatriculasT) && MatriculasT.length > 0) {
+          for (const tutoria of MatriculasT) {
+            if (tutoria.EstudianteCorreo === email) {
+              let tutoriaFecha = tutoria.Fecha;
+              let tutoriaHora = tutoria.Hora;
+              let soloFecha = tutoriaFecha.split('T')[0];
+              let soloHora = tutoriaHora.split('T')[1].split('.')[0];
+              let fechaActual = tutoria.FechaPago;
+              let fechactual = fechaActual.split('T')[0];
+            
+              mensajePagos += `\n\nTutoría #${cont}:\n`;              
+              mensajePagos += `Nombre de la tutoria: ${tutoria.NomTutoria}\n`;
+              mensajePagos += `Enlace a clase: ${tutoria.EnlaceClase}\n`;
+              mensajePagos += `Día de la tutoría: ${soloFecha}\n`;
+              mensajePagos += `Hora de la tutoría: ${soloHora}\n`;
+              mensajePagos += `Identificación de la matricula: ${tutoria.MatriculaID}\n`;
+              mensajePagos += `Fecha de matrícula: ${fechactual}\n`;
+              mensajePagos += `Comprobante de pago: ${tutoria.Comprobante}\n`;
+              mensajePagos += `Monto de la tutoría: ${tutoria.Monto}\n`;
+              mensajePagos += '\n-------------------------------- *** --------------------------------';              
+              cont++;
+            }
+          }
+        }
+
+        try {
+          const respuesta = await fetch('http://localhost:1434/enviarInforme', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              correo: email,
+              mensajePagos: mensajePagos
+            })
+          });
+
+          if (!respuesta.ok) {
+            const errorText = await respuesta.text();
+            throw new Error(`HTTP error! status: ${respuesta.status} - ${errorText}`);
+          }
+            const resultado = await respuesta.json();
+            alert(resultado.mensaje);
+        } catch (error) {
+          console.error('Error al enviar el correo:', error);
+          alert('Error al enviar el correo');
+        }
+      });
+    </script>
+  </body>
+</html>
